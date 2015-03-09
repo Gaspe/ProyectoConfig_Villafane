@@ -11,38 +11,49 @@ import android.widget.TextView;
 
 
 public class StartScreen extends ActionBarActivity {
-    protected SharedPreferences mSharedPreferences;
-    protected StartScreen mMainActivity = this;
-    protected String sname="";
-    protected String sage="";
-    protected String sgenre="";
+
     TextView name,age,genre;
+    protected StartScreen mMainActivity = this;
+    protected SharedPreferences mSharedPreferences;
+    protected String skey = "";
+    protected String skey2="";
+    protected String skey3="";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start_screen);
-        name = (TextView) findViewById(R.id.textView4);
-        age = (TextView) findViewById(R.id.textView5);
-        genre = (TextView) findViewById(R.id.textView6);
+        name = (TextView) findViewById(R.id.nombre2);
+        age = (TextView) findViewById(R.id.edad2);
+        genre = (TextView) findViewById(R.id.genero2);
         if(this.getIntent().getExtras()!=null) {
             Bundle newB=this.getIntent().getExtras();
             name.setText(newB.getString("nom_key"));
             age.setText(newB.getString("edad_key"));
             genre.setText(newB.getString("genero_key"));
         }
+        else{
+            mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+            String text = mSharedPreferences.getString(skey, "");
+            String text1 = mSharedPreferences.getString(skey2, "");
+            String text2 = mSharedPreferences.getString(skey3, "");
+            name.setText(text);
+            age.setText(text1);
+            genre.setText(text2);
+
+        }
     }
-    //@Override
-    /*protected void onDestroy(){
+
+    protected void onDestroy(){
+        super.onDestroy();
+        name = (TextView) findViewById(R.id.nombre2);
+        age = (TextView) findViewById(R.id.edad2);
+        genre = (TextView) findViewById(R.id.genero2);
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(mMainActivity.getApplicationContext());
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString8(sname, name.getText().toString());
-        editor.putString(sage, age.getText().toString());
-        editor.putString(sgenre,genre.getText().toString());
+        editor.putString(skey, name.getText().toString());
         editor.commit();
-    }*/
-    public void onBackPressed(){
-        finish();
     }
 
     @Override
@@ -63,6 +74,7 @@ public class StartScreen extends ActionBarActivity {
         if (id == R.id.action_settings) {
             Intent intent=new Intent(this,SettingsActivity.class);
             startActivity(intent);
+            finish();
             return true;
 
         }

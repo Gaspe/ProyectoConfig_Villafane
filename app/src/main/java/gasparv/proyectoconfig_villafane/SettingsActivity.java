@@ -3,6 +3,7 @@ package gasparv.proyectoconfig_villafane;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
@@ -41,7 +42,7 @@ public class SettingsActivity extends PreferenceActivity {
      */
     private static final boolean ALWAYS_SIMPLE_PREFS = false;
 
-
+    protected SharedPreferences mSharedPreferences;
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
@@ -60,7 +61,10 @@ public class SettingsActivity extends PreferenceActivity {
            B.putString("genero_key",genre);
            intento.putExtras(B);
            startActivity(intento);
+           finish();
+
     }
+
     /**
      * Shows the simplified settings UI if the device configuration if the
      * device configuration dictates that a simplified, single-pane UI should be
