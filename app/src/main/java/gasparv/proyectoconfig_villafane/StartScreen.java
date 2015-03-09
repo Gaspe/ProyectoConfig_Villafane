@@ -15,9 +15,9 @@ public class StartScreen extends ActionBarActivity {
     TextView name,age,genre;
     protected StartScreen mMainActivity = this;
     protected SharedPreferences mSharedPreferences;
-    protected String skey = "";
-    protected String skey2="";
-    protected String skey3="";
+    protected String skey = "name_key";
+    protected String skey2="age_key";
+    protected String skey3="genre_key";
 
 
     @Override
